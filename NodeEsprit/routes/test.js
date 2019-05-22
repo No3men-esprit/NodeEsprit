@@ -44,11 +44,33 @@
 
 var express = require("express");
 var router = express.Router();
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    port: 3306,
+    database: 'fixit'
+});
 
 router.get("/api/string/:text", function (req, res) {
     res.writeHead(200, {
         "Content-Type": "application/json"
     });
+    connection.connect(function (err) {
+        if (err) {
+            console.error('error connecting: ' + err.stack);
+            return;
+        }
+        connection.query('SELECT * from service', function (error, results, fields) {
+            if (error)
+                throw error;
+            // connected!
+            else console.error('results : ' + JSON.stringify(results));
+        });
+       
+    });
+
     res.write(JSON.stringify({original: req.params.text, reverted: req.params.text.reverse()}));
     res.end();
 });
