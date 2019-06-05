@@ -9,7 +9,11 @@ const bodyParser = require('body-parser');
 var mysql = require("mysql");
 
 var service = require("./routes/service");
-
+var annonce = require("./routes/annonce");
+var demande = require("./routes/demande");
+var pays = require("./routes/pays");
+var region = require("./routes/region");
+var ville = require("./routes/ville");
 // create express app
 const app = express();
 
@@ -30,6 +34,11 @@ app.use(function (req, res, next) {
 });
 // define a simple route
 app.use("/service", service);
+app.use("/annonce", annonce);
+app.use("/demande", demande);
+app.use("/pays", pays);
+app.use("/region", region);
+app.use("/ville", ville);
 app.get('/', (req, res) => {
     res.json({"message": "Welcome to nodesprit application"});
 });

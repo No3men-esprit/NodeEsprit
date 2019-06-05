@@ -46,19 +46,14 @@ var express = require("express");
 var router = express.Router();
 
 router.get("/", function (req, res) {
-    res.writeHead(200, {
-        "Content-Type": "application/json"
-    });
     res.locals.connection.query('SELECT * from service', function (error, results, fields) {
         if (error) {
-            throw error;
+            res.status(500);
+            res.send({"status": false});
             res.end();
-        }
-        // connected!
-        else {
-            console.error('results : ' + JSON.stringify(results));
-            res.write(JSON.stringify(results));
-            res.end();
+        } else {
+            res.status(200);
+            res.send(results);
         }
     });
 
