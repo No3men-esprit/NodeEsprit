@@ -14,6 +14,7 @@ var demande = require("./routes/demande");
 var pays = require("./routes/pays");
 var region = require("./routes/region");
 var ville = require("./routes/ville");
+var prestataire = require("./routes/prestataire");
 // create express app
 const app = express();
 
@@ -39,6 +40,7 @@ app.use("/demande", demande);
 app.use("/pays", pays);
 app.use("/region", region);
 app.use("/ville", ville);
+app.use("/prestataire", prestataire);
 app.get('/', (req, res) => {
     res.json({"message": "Welcome to nodesprit application"});
 });
