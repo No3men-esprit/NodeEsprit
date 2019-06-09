@@ -38,6 +38,23 @@ router.get("/getAnnoncePublier/:idservice", function (req, res) {
                 }
             });
 
+
+});
+
+router.get("/getAnnonceByIdClient/:idclient", function (req, res) {
+    res.locals.connection.query("Select a.id,a.idclient,a.idservice,a.title,a.description,a.minprix,a.maxprix,u.nom,u.prenom from annonce a INNER JOIN utilisateur u where u.id = a.idclient and a.idclient=" + req.params.idclient,
+            function (error, results, fields) {
+                if (error) {
+                    throw error;
+                    res.status(500);
+                    res.send({"status": false});
+                } else {
+                    res.status(200);
+                    res.send(results);
+                }
+            });
+
+
 });
 
 module.exports = router;
