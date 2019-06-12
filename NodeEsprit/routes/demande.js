@@ -40,7 +40,7 @@ router.get("/getAllDemandeAccepter/:idclient", function (req, res) {
 });
 
 router.get("/getAllNewDemande/:idprestataire", function (req, res) {
-    res.locals.connection.query("Select uc.id idclient,d.id,d.title,d.description description,uc.nom,uc.prenom,d.dateFunction,d.image,d.prix from utilisateur u INNER JOIN prestataire p INNER JOIN demande d INNER JOIN client c INNER JOIN utilisateur uc  where uc.id = c.id and c.id = d.Cli_id and p.Uti_id = " + req.params.idprestataire + " and u.id = p.Uti_id and d.Uti_id = p.Uti_id and  d.acceptation_prestataire = 0",
+    res.locals.connection.query("Select uc.id idclient,d.id,d.title,d.description description,uc.nom,uc.prenom,d.dateFunction,d.prix from utilisateur u INNER JOIN prestataire p INNER JOIN demande d INNER JOIN client c INNER JOIN utilisateur uc  where uc.id = c.id and c.id = d.Cli_id and p.Uti_id = " + req.params.idprestataire + " and u.id = p.Uti_id and d.Uti_id = p.Uti_id and  d.acceptation_prestataire = 0",
             function (error, results, fields) {
                 if (error) {
                     throw error;

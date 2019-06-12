@@ -26,7 +26,7 @@ router.post("/add", function (req, res) {
 });
 
 router.get("/getAnnoncePublier/:idservice", function (req, res) {
-    res.locals.connection.query("Select a.id,a.idclient,a.idservice,a.description,a.image,a.minprix,a.maxprix,u.nom,u.prenom from annonce a INNER JOIN utilisateur u where u.id = a.idclient and idservice=" + req.params.idservice + " and publier = 1",
+    res.locals.connection.query("Select a.id,a.idclient,a.idservice,a.title,a.description,a.minprix,a.maxprix,u.nom,u.prenom from annonce a INNER JOIN utilisateur u where u.id = a.idclient and idservice=" + req.params.idservice + " and publier = 1",
             function (error, results, fields) {
                 if (error) {
                     throw error;
@@ -53,8 +53,19 @@ router.get("/getAnnonceByIdClient/:idclient", function (req, res) {
                     res.send(results);
                 }
             });
-
-
 });
 
+router.get("/getIdServiceByIdPrestataire/:idprestataire", function (req, res) {
+    res.locals.connection.query("Select id from prestataire where  Uti_id =" + req.params.idprestataire,
+            function (error, results, fields) {
+                if (error) {
+                    throw error;
+                    res.status(500);
+                    res.send({"status": false});
+                } else {
+                    res.status(200);
+                    res.send(results);
+                }
+            });
+});
 module.exports = router;
