@@ -15,6 +15,11 @@ var pays = require("./routes/pays");
 var region = require("./routes/region");
 var ville = require("./routes/ville");
 var prestataire = require("./routes/prestataire");
+var login = require("./routes/login");
+var signup = require("./routes/signup");
+var signupp = require("./routes/signupp");
+var validation = require("./routes/validation");
+// create express app
 // create express app
 const app = express();
 
@@ -41,6 +46,10 @@ app.use("/pays", pays);
 app.use("/region", region);
 app.use("/ville", ville);
 app.use("/prestataire", prestataire);
+app.use("/login", login);
+app.use("/signup", signup);
+app.use("/signupp", signupp);
+app.use("/validation", validation);
 app.get('/', (req, res) => {
     res.json({"message": "Welcome to nodesprit application"});
 });
